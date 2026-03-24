@@ -5,27 +5,32 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
+import { libInjectCss } from "vite-plugin-lib-inject-css";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [libInjectCss(), react()],
   build: {
+    outDir: "dist",
+    cssCodeSplit: true,
     lib: {
       entry: path.resolve(dirname, "src/index.ts"),
-      name: "Unsullied",
-      fileName: "unsullied",
+      formats: ["es"],
     },
     rollupOptions: {
       // React must not be bundled — consumers provide it via peerDependencies.
       external: ["react", "react-dom", "react/jsx-runtime"],
       output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "react/jsx-runtime": "ReactJSXRuntime",
+        preserveModules: true,
+        preserveModulesRoot: "src",
+        entryFileNames: (chunkInfo) => {
+          // CSS virtual modules get a .js wrapper — skip them, CSS is extracted separately
+          if (chunkInfo.name.endsWith(".css")) return "assets/[name].js";
+          return "[name].js";
         },
+        assetFileNames: "[name][extname]",
       },
     },
   },
