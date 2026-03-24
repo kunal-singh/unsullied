@@ -1,0 +1,25 @@
+/*
+ * Global design tokens and base styles.
+ * This file is bundled into dist/style.css alongside component CSS modules.
+ *
+ * Add CSS custom properties (variables), resets, and typography here.
+ * Components import their own <ComponentName>.module.css files for scoped styles.
+ */
+
+/* Example token structure — uncomment and extend as needed:
+
+:root {
+  --color-primary: #000;
+  --color-background: #fff;
+
+  --font-sans: system-ui, sans-serif;
+  --font-size-base: 1rem;
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-4: 1rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+}
+*/

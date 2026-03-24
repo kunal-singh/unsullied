@@ -1,22 +1,36 @@
 {
-  "name": "unsullied",
+  "name": "@kunal-singh/unsullied",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./dist/unsullied.umd.cjs",
+  "module": "./dist/unsullied.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/unsullied.js",
+      "require": "./dist/unsullied.umd.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -p tsconfig.app.json && vite build",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "dependencies": {
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@eslint/js": "^9.39.4",
