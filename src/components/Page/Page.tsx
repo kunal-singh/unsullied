@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
 
-import { Header } from "./Header";
-import "./page.css";
+import { Header } from "../Header/Header";
+import "./Page.css";
 
 interface User {
   name: string;
