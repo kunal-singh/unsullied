@@ -10,5 +10,14 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding",
   ],
   framework: "@storybook/react-vite",
+  viteFinal: (config) => {
+    config.build ??= {};
+    config.build.rolldownOptions ??= {};
+    config.build.rolldownOptions.output ??= {};
+    // Vite 8 uses Rolldown which doesn't guarantee module execution order in
+    // production builds, causing `PH[e] is not a function` in static deploys.
+    (config.build.rolldownOptions.output as Record<string, unknown>).strictExecutionOrder = true;
+    return config;
+  },
 };
 export default config;
